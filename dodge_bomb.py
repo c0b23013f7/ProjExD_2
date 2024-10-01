@@ -79,14 +79,13 @@ def roto_zoom(kk_img):
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
-    bg_img = pg.image.load("fig/pg_bg.jpg")    
-    kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9)
-    kk_rct = kk_img.get_rect()
-    kk_rct.center = 300, 200
+    bg_img = pg.image.load("fig/pg_bg.jpg")
+    kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9)  # こうかとんの画像を読み込み、回転・拡大縮小する
+    kk_rct = kk_img.get_rect()  # こうかとんのRectを取得
+    kk_rct.center = 300, 200  # 初期位置を設定
 
-    roto = roto_zoom(kk_img)
-
-    bb_imgs, bb_accs = bombtime()
+    roto = roto_zoom(kk_img)  # こうかとんの画像を回転・拡大縮小する関数を呼び出す
+    bb_imgs, bb_accs = bombtime()   # 爆弾の画像リストと加速度リストを取得する関数を呼び出す
 
     #bb_img = pg.Surface((20, 20))  # 空のSurface
     #bb_img.set_colorkey((0, 0, 0))  # 爆弾の四隅を透過させる
