@@ -85,7 +85,7 @@ def main():
     kk_rct.center = 300, 200  # 初期位置を設定
 
     roto = roto_zoom(kk_img)  # こうかとんの画像を回転・拡大縮小する関数を呼び出す
-    bb_imgs, bb_accs = bombtime()   # 爆弾の画像リストと加速度リストを取得する関数を呼び出す
+    bb_imgs, bb_accs = bombtime()   # 爆弾の画像リストと加速度リストを取得する関数を呼び出す。
 
     #bb_img = pg.Surface((20, 20))  # 空のSurface
     #bb_img.set_colorkey((0, 0, 0))  # 爆弾の四隅を透過させる
