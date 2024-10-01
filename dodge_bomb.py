@@ -59,6 +59,23 @@ def bombtime():
     
     return bb_imgs, bb_accs
 
+
+def roto_zoom(kk_img):
+    """
+    キーの方向に応じて、こうかとん画像を回転させた辞書関数
+    """
+    roto= {
+        (0, -5): pg.transform.rotozoom(kk_img, 90, 1.0),     # 上
+        (0, +5): pg.transform.rotozoom(kk_img, -90, 1.0),    # 下
+        (-5, 0): pg.transform.rotozoom(kk_img, 180, 1.0),    # 左
+        (+5, 0): pg.transform.rotozoom(kk_img, 0, 1.0),      # 右
+        (-5, -5): pg.transform.rotozoom(kk_img, 135, 1.0),   # 左上
+        (-5, +5): pg.transform.rotozoom(kk_img, -135, 1.0),  # 左下
+        (+5, -5): pg.transform.rotozoom(kk_img, 45, 1.0),    # 右上
+        (+5, +5): pg.transform.rotozoom(kk_img, -45, 1.0)    # 右下
+    }
+    return roto
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -66,6 +83,8 @@ def main():
     kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9)
     kk_rct = kk_img.get_rect()
     kk_rct.center = 300, 200
+
+    roto = roto_zoom(kk_img)
 
     bb_imgs, bb_accs = bombtime()
 
