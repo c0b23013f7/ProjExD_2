@@ -2,11 +2,29 @@ import os
 import random
 import sys
 import pygame as pg
+import time
 
 
 WIDTH, HEIGHT = 1100, 650
 DELTA = {pg.K_UP: (0, -5),pg.K_DOWN: (0, +5), pg.K_LEFT: (-5, 0), pg.K_RIGHT: (+5, 0),}
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+
+def game_over(screen, txt, fonto):
+    black = pg.Surface(screen.get_size())  # 画面サイズのSurfaceを作成
+    black.fill((0, 0, 0))  # 黒く塗りつぶす
+    black.set_alpha(150)  # 半透明に
+    
+    screen.blit(black, (0, 0))  # 画面に描画（ブラックアウト）
+    screen.blit(txt, (530, 150))  # 泣いているこうかとんの画像を表示
+    
+    # Game Overの文字列を表示
+    txt = fonto.render("Game Over", True, (255, 255, 255))  # 白い文字で表示
+    screen.blit(txt, (400, 300))  # 文字の場所指定
+    pg.display.update()  # 表示の更新
+
+    time.sleep(5)
+
 
 
 def check_bound(obj_rct: pg.Rect) -> tuple[bool, bool]:
@@ -41,16 +59,20 @@ def main():
 
     clock = pg.time.Clock()
     tmr = 0
+    fonto = pg.font.Font(None, 80)  # 任意のフォントとサイズを指定
+    
+    txt = pg.image.load("fig/8.png")  # 泣いているこうかとん画像
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return
         screen.blit(bg_img, [0, 0]) 
         if kk_rct.colliderect(bb_rct):  # こうかとんと爆弾が重なっていたら
-            print("GameOver")
+            game_over(screen, txt, fonto)
+            #print("GameOver")
             return
         
-        
+
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]  #横座標 縦座標
         #if key_lst[pg.K_UP]:
